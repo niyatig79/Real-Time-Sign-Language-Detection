@@ -53,16 +53,17 @@ The current model is trained on the following signs:
 
  Label      | Description                        
 ------------|------------------------------------
- `hello`    | Waving gesture                     
- `thanks`   | Hand from chin outward             
+ `hello`    | Hand from side of your forehead to outwards                
+ `thanks`   | Hand from chin to outwards           
  `yes`      | Fist nodding motion                
- `no`       | Hand side-to-side                  
+ `no`       | Index and middle fingers meeting your thumb                  
  `i_love_you` | Classic one-handed "I ❤️ U" sign   
  `please`   | Hand circling on chest             
  `stop`     | Open palm gesture                  
- `help`     | One hand lifting the other         
+ `help`     | Thumb out of one hand placing on others open palm
  `goodbye`  | Wave with open hand                
- `okay`     | Thumb and index forming an "O"     
+ `okay`     | Thumb and index forming an "O" and rest open wide
+ `sorry`    | Fist circling on chest
 
 ---
 
