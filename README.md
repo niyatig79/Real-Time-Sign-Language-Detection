@@ -1,10 +1,10 @@
-# 🤟 Real-Time Sign Language Detection using Transformer + MediaPipe
+# Real-Time Sign Language Detection using Transformer + MediaPipe
 
-This project implements a real-time sign language gesture classification system using **MediaPipe Holistic** for keypoint extraction and a custom-built **Transformer model (PyTorch)** for sequence classification. It runs directly on your webcam and provides live predictions with a smooth and responsive UI.
+This project implements a real-time sign language gesture classification system using **MediaPipe Holistic** for keypoint extraction and a custom-built **Transformer model (PyTorch)** for sequence classification. It runs directly on your webcam and provides live predictions.
 
 ---
 
-## 🔍 Overview
+## Overview
 
 - **Keypoint Extraction**: Uses [MediaPipe Holistic](https://google.github.io/mediapipe/solutions/holistic.html) to extract 3D landmarks of face, pose, and both hands.
 - **Sequence Modeling**: A Transformer model learns temporal dynamics over a sequence of 30 frames to classify the gesture.
@@ -12,7 +12,7 @@ This project implements a real-time sign language gesture classification system 
 
 ---
 
-## 📸 How It Works
+## How It Works
 
 1. **Capture Webcam Feed**
 2. **Extract 3D Landmarks** using MediaPipe Holistic
@@ -22,11 +22,11 @@ This project implements a real-time sign language gesture classification system 
 
 ---
 
-## 🧠 Transformer Model Architecture
+## Transformer Model Architecture
 
 The model is based on the **Transformer Encoder** architecture adapted for gesture classification.
 
-### 🔧 Architecture Details:
+### Architecture Details:
 
 - **Input**: Shape `(Batch, 30, 1662)` → 30 frames of keypoints (each frame has 1662 features)
 - **Positional Encoding**: Injects temporal information
@@ -38,7 +38,7 @@ The model is based on the **Transformer Encoder** architecture adapted for gestu
 - **Global Average Pooling**: Compresses time dimension
 - **Fully Connected Layer** → Softmax
 
-### 📚 Theory
+### Theory
 
 - **Self-Attention** captures the relationship between keypoints across frames.
 - **Multi-head Attention** allows learning from multiple temporal contexts.
@@ -47,96 +47,43 @@ The model is based on the **Transformer Encoder** architecture adapted for gestu
 
 ---
 
-## ✋ Recognized Gestures
+## Recognized Gestures
 
 The current model is trained on the following signs:
 
-| Label      | Description                        |
-|------------|------------------------------------|
-| `hello`    | Waving gesture                     |
-| `thanks`   | Hand from chin outward             |
-| `yes`      | Fist nodding motion                |
-| `no`       | Hand side-to-side                  |
-| `iloveyou` | Classic one-handed "I ❤️ U" sign   |
-| `please`   | Hand circling on chest             |
-| `stop`     | Open palm gesture                  |
-| `help`     | One hand lifting the other         |
-| `goodbye`  | Wave with open hand                |
-| `okay`     | Thumb and index forming an "O"     |
-
-> ⚠️ You can easily extend this by collecting new gesture data.
+ Label      | Description                        
+------------|------------------------------------
+ `hello`    | Waving gesture                     
+ `thanks`   | Hand from chin outward             
+ `yes`      | Fist nodding motion                
+ `no`       | Hand side-to-side                  
+ `i_love_you` | Classic one-handed "I ❤️ U" sign   
+ `please`   | Hand circling on chest             
+ `stop`     | Open palm gesture                  
+ `help`     | One hand lifting the other         
+ `goodbye`  | Wave with open hand                
+ `okay`     | Thumb and index forming an "O"     
 
 ---
 
-## 🧪 Training Pipeline
+## Training Pipeline
 
 1. **Collect Data**: Capture sequences using MediaPipe and store `.npy` files.
 2. **Preprocess**: Shape data into `(N, 30, 1662)` arrays.
-3. **Train Model**:
-   ```bash
-   python train.py
-   ```
+3. **Train Model**
 4. **Save Model**: Save and load `.pt` weights for inference.
 
 ---
 
-## ▶️ Run Real-Time Inference
+## Installation
 
-Make sure you have a trained model saved and MediaPipe installed.
-
-```bash
-python real_time_inference.py
-```
-
-Press `q` to quit.
-
----
-
-## 📦 Installation
-
-### ✅ Requirements
+### Requirements
 
 - Python 3.8+
 - PyTorch
 - OpenCV
 - MediaPipe
 - NumPy, SciPy
-
-### 🔧 Setup
-
-```bash
-git clone https://github.com/yourusername/sign-language-transformer.git
-cd sign-language-transformer
-pip install -r requirements.txt
-```
-
----
-
-## 🗂️ Project Structure
-
-```
-📂 sign-language-transformer/
-├── real_time_inference.py     # Webcam inference code
-├── train.py                   # Model training script
-├── model.py                   # Transformer model
-├── utils.py                   # MediaPipe + keypoint helpers
-├── data/                      # Stored keypoint sequences
-├── checkpoints/               # Saved model weights
-└── requirements.txt
-```
-
----
-
-## 🧠 Sample Key Function
-
-```python
-def prob_viz(res, actions, input_frame, colors):
-    for num, prob in enumerate(res):
-        cv2.rectangle(input_frame, (0, 60+num*40), (int(prob*100), 90+num*40), colors[num], -1)
-        cv2.putText(input_frame, actions[num], (0, 85+num*40),
-                    cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
-    return input_frame
-```
 
 ---
 
@@ -150,10 +97,4 @@ def prob_viz(res, actions, input_frame, colors):
 
 ## 📄 License
 
-This project is open-source under the MIT License.
-
----
-
-## 🙌 Contributions
-
-Feel free to fork the repo, improve the model, add more gestures, or build a GUI! PRs are welcome.
+This project is open-source under the Apache 2.0 License.
